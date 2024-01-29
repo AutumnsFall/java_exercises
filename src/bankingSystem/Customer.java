@@ -31,4 +31,12 @@ public class Customer {
     public String getName() {
         return name;
     }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getDob() {
+        return dob;
+    }
 }

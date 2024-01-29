@@ -11,6 +11,7 @@ public class Bank {
     public Bank() {
         this.input = new InputScanner();
         this.customers = new ArrayList<Customer>();
+        this.customers.add(this.dummyCustomer());
     }
 
     public void createCustomer() {
@@ -24,15 +25,48 @@ public class Bank {
         this.customers.add(customer);
     }
 
-    public void searchCustomerByName (String name) {
+    public Customer dummyCustomer () {
+        return new Customer("1", "Autumn", "Somewhere", "12345", "Sometime", 12.5);
+    }
+
+    public Customer searchCustomerByName (String name) {
         for (Customer currCustomer: this.customers) {
             if (currCustomer.getName().equalsIgnoreCase(name)) {
                 System.out.println("Customer Found");
-                currCustomer.describeCustomer();
-                return;
+                return currCustomer;
             }
         }
         System.out.println("Customer does not exist");
+        return null;
+    }
+
+    public int searchCustomerIndexByName (String name) {
+        int index = 0;
+        for (Customer currCustomer: this.customers) {
+            if (currCustomer.getName().equalsIgnoreCase(name)) {
+                System.out.println("Customer Found");
+                return index;
+            }
+            index++;
+        }
+        System.out.println("Customer does not exist");
+        return -1;
+    }
+
+    public void updateCustomer (String name) {
+        Customer targetCustomer = this.searchCustomerByName(name);
+        if (targetCustomer != null) {
+            String newDob = this.input.readStringInput("Current (" + targetCustomer.getDob() + "). Enter New Value:");
+            int index = this.searchCustomerIndexByName(name);
+            targetCustomer.setDob(newDob);
+            this.customers.set(index, targetCustomer);
+        }
+    }
+
+    public void showAllCustomer () {
+        for (Customer currCustomer: this.customers) {
+            currCustomer.describeCustomer();
+        }
     }
 
 }
