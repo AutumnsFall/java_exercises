@@ -29,11 +29,13 @@ public class Bank {
         return new Customer("1", "Autumn", "Somewhere", "12345", "Sometime", 12.5);
     }
 
-    public Customer searchCustomerByName (String name) {
+    public Customer searchCustomerByName (String name) throws CloneNotSupportedException {
         for (Customer currCustomer: this.customers) {
             if (currCustomer.getName().equalsIgnoreCase(name)) {
                 System.out.println("Customer Found");
                 return currCustomer;
+//                Customer clone = (Customer) currCustomer.clone();
+//                return clone;
             }
         }
         System.out.println("Customer does not exist");
@@ -53,13 +55,13 @@ public class Bank {
         return -1;
     }
 
-    public void updateCustomer (String name) {
+    public void updateCustomer (String name) throws CloneNotSupportedException {
         Customer targetCustomer = this.searchCustomerByName(name);
         if (targetCustomer != null) {
             String newDob = this.input.readStringInput("Current (" + targetCustomer.getDob() + "). Enter New Value:");
-            int index = this.searchCustomerIndexByName(name);
+//            int index = this.searchCustomerIndexByName(name);
             targetCustomer.setDob(newDob);
-            this.customers.set(index, targetCustomer);
+//            this.customers.set(index, targetCustomer);
         }
     }
 
@@ -69,7 +71,7 @@ public class Bank {
         }
     }
 
-    public void deleteCustomerByName (String name) {
+    public void deleteCustomerByName (String name) throws CloneNotSupportedException {
         Customer targetCustomer = this.searchCustomerByName(name);
         this.customers.remove(targetCustomer);
     }

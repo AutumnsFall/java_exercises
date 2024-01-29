@@ -1,6 +1,6 @@
 package bankingSystem;
 
-public class Customer {
+public class Customer implements Cloneable{
 
     private String id;
     private String name;
@@ -16,6 +16,11 @@ public class Customer {
         this.phone = phone;
         this.dob = dob;
         this.currCash = currCash;
+    }
+
+    public Object clone() throws CloneNotSupportedException
+    {
+        return super.clone();
     }
 
     public void describeCustomer() {
