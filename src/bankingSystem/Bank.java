@@ -24,6 +24,17 @@ public class Bank {
         this.customers.add(customer);
     }
 
+    public void searchCustomerByName (String name) {
+        for (Customer currCustomer: this.customers) {
+            if (currCustomer.getName().equalsIgnoreCase(name)) {
+                System.out.println("Customer Found");
+                currCustomer.describeCustomer();
+                return;
+            }
+        }
+        System.out.println("Customer does not exist");
+    }
+
 }
 
 

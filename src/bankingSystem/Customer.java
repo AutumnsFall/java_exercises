@@ -27,4 +27,8 @@ public class Customer {
         System.out.println("Current Cash in Bank:" + this.currCash);
         System.out.println("------------------------------------------");
     }
+
+    public String getName() {
+        return name;
+    }
 }
