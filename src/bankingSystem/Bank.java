@@ -69,6 +69,11 @@ public class Bank {
         }
     }
 
+    public void deleteCustomerByName (String name) {
+        Customer targetCustomer = this.searchCustomerByName(name);
+        this.customers.remove(targetCustomer);
+    }
+
 }
 
 
