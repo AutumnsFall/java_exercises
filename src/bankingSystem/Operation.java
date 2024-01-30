@@ -22,4 +22,7 @@ public class Operation {
         return amount;
     }
 
+    public double getServiceFee() {
+        return serviceFee;
+    }
 }

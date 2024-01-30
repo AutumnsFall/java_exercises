@@ -8,12 +8,16 @@ public class Bank {
     private ArrayList<Withdraw> withdrawalOperations;
     private ArrayList<Deposit> depositOperations;
     private ArrayList<Transfer> transferOperations;
+
+    private double totalProcessingFees;
     private InputScanner input;
     public Bank() {
         this.input = new InputScanner();
         this.customers = new ArrayList<Customer>();
         this.customers.add(this.dummyCustomer());
         this.customers.add(this.dummyCustomer());
+
+        this.totalProcessingFees = 0;
 
         this.depositOperations = new ArrayList<Deposit>();
         this.withdrawalOperations = new ArrayList<Withdraw>();
@@ -44,6 +48,7 @@ public class Bank {
         Deposit deposit = new Deposit(customerId, forDeposit);
         this.depositOperations.add(deposit);
         targetCustomer.depositCash(deposit.getAmount());
+        this.totalProcessingFees += deposit.getServiceFee();
     }
 
     public void bankWithdraw () {
@@ -54,6 +59,7 @@ public class Bank {
         Withdraw withdraw = new Withdraw(customerId, forWithdraw, "bank");
         this.withdrawalOperations.add(withdraw);
         targetCustomer.withdrawCash(withdraw.getAmount());
+        this.totalProcessingFees += withdraw.getServiceFee();
     }
 
     public void atmWithdraw() {
@@ -64,6 +70,7 @@ public class Bank {
         Withdraw withdraw = new Withdraw(customerId, forWithdraw, "atm");
         this.withdrawalOperations.add(withdraw);
         targetCustomer.withdrawCash(withdraw.getAmount());
+        this.totalProcessingFees += withdraw.getServiceFee();
     }
 
     public void transfer() {
@@ -78,6 +85,7 @@ public class Bank {
         this.transferOperations.add(transfer);
         fromCustomer.withdrawCash(transferAmt);
         toCustomer.depositCash(transfer.getAmount());
+        this.totalProcessingFees += transfer.getServiceFee();
     }
 
     public Customer searchCustomerById (String id) {
@@ -150,6 +158,10 @@ public class Bank {
 
     public void showAllTransferOperations () {
         for (Transfer transfer: this.transferOperations) transfer.describeTransfer();
+    }
+
+    public void showTotalProcessingFees () {
+        System.out.println("Total Processing Fees Obtained:" + this.totalProcessingFees);
     }
 }
 
