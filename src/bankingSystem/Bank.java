@@ -13,9 +13,11 @@ public class Bank {
         this.input = new InputScanner();
         this.customers = new ArrayList<Customer>();
         this.customers.add(this.dummyCustomer());
+        this.customers.add(this.dummyCustomer());
 
         this.depositOperations = new ArrayList<Deposit>();
         this.withdrawalOperations = new ArrayList<Withdraw>();
+        this.transferOperations = new ArrayList<Transfer>();
     }
 
     public void createCustomer() {
@@ -30,7 +32,8 @@ public class Bank {
     }
 
     public Customer dummyCustomer () {
-        return new Customer("1", "Autumn", "Somewhere", "12345", "Sometime", 12.5);
+        int counter = this.customers.size() + 1;
+        return new Customer( "" + counter, "Autumn" + counter, "Somewhere", "12345", "Sometime", 12.5);
     }
 
     public void deposit () {
@@ -61,6 +64,20 @@ public class Bank {
         Withdraw withdraw = new Withdraw(customerId, forWithdraw, "atm");
         this.withdrawalOperations.add(withdraw);
         targetCustomer.withdrawCash(withdraw.getAmount());
+    }
+
+    public void transfer() {
+        String fromCustomerId = this.input.readStringInput("Enter From Customer Id:");
+        Customer fromCustomer = this.searchCustomerById(fromCustomerId);
+        if (fromCustomer == null) return;
+        String toCustomerId = this.input.readStringInput("Enter To Customer Id:");
+        Customer toCustomer = this.searchCustomerById(toCustomerId);
+        if (toCustomer == null) return;
+        double transferAmt = this.input.readDoubleInput("Enter Transfer Amount:");
+        Transfer transfer = new Transfer(fromCustomerId, transferAmt, toCustomerId);
+        this.transferOperations.add(transfer);
+        fromCustomer.withdrawCash(transferAmt);
+        toCustomer.depositCash(transfer.getAmount());
     }
 
     public Customer searchCustomerById (String id) {
@@ -129,6 +146,10 @@ public class Bank {
 
     public void showAllWithdrawOperations () {
         for (Withdraw withdraw: this.withdrawalOperations) withdraw.describeWithdrawal();
+    }
+
+    public void showAllTransferOperations () {
+        for (Transfer transfer: this.transferOperations) transfer.describeTransfer();
     }
 }
 
