@@ -1,5 +1,6 @@
 package bankingSystem;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Bank {
@@ -12,6 +13,8 @@ public class Bank {
         this.input = new InputScanner();
         this.customers = new ArrayList<Customer>();
         this.customers.add(this.dummyCustomer());
+
+        this.depositOperations = new ArrayList<Deposit>();
     }
 
     public void createCustomer() {
@@ -34,7 +37,9 @@ public class Bank {
         Customer targetCustomer = this.searchCustomerById(customerId);
         if (targetCustomer == null) return;
         double forDeposit = this.input.readDoubleInput("Enter Deposit Amount:");
-        targetCustomer.depositCash(forDeposit);
+        Deposit deposit = new Deposit(customerId, forDeposit);
+        this.depositOperations.add(deposit);
+        targetCustomer.depositCash(deposit.getAmount());
     }
 
     public Customer searchCustomerById (String id) {
@@ -97,6 +102,9 @@ public class Bank {
         this.customers.remove(targetCustomer);
     }
 
+    public void showAllDepositOperations () {
+        for (Deposit deposit: this.depositOperations) deposit.describeDeposit();
+    }
 }
 
 

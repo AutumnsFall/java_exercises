@@ -7,6 +7,7 @@ public class Main {
         bank.showAllCustomer();
         bank.deposit();
         bank.showAllCustomer();
+        bank.showAllDepositOperations();
     }
 
 }
