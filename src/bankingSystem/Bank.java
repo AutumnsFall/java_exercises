@@ -74,8 +74,9 @@ public class Bank {
         return -1;
     }
 
-    public void updateCustomer (String name) throws CloneNotSupportedException {
-        Customer targetCustomer = this.searchCustomerByName(name);
+    public void updateCustomer () throws CloneNotSupportedException {
+        String customerName = this.input.readStringInput("Enter Customer Name:");
+        Customer targetCustomer = this.searchCustomerByName(customerName);
         if (targetCustomer != null) {
             String newDob = this.input.readStringInput("Current (" + targetCustomer.getDob() + "). Enter New Value:");
 //            int index = this.searchCustomerIndexByName(name);
@@ -90,8 +91,9 @@ public class Bank {
         }
     }
 
-    public void deleteCustomerByName (String name) throws CloneNotSupportedException {
-        Customer targetCustomer = this.searchCustomerByName(name);
+    public void deleteCustomerByName () throws CloneNotSupportedException {
+        String customerName = this.input.readStringInput("Enter Customer Name:");
+        Customer targetCustomer = this.searchCustomerByName(customerName);
         this.customers.remove(targetCustomer);
     }
 
