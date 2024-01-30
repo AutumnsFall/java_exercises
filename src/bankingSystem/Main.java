@@ -5,9 +5,9 @@ public class Main {
     public static void main(String[] args) throws CloneNotSupportedException {
         Bank bank = new Bank();
         bank.showAllCustomer();
-        bank.deposit();
+        bank.atmWithdraw();
         bank.showAllCustomer();
-        bank.showAllDepositOperations();
+        bank.showAllWithdrawOperations();
     }
 
 }

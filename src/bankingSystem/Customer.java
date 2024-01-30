@@ -27,6 +27,10 @@ public class Customer implements Cloneable{
         this.currCash += depositAmt;
     }
 
+    public void withdrawCash(double withdrawAmt) {
+        this.currCash -= withdrawAmt;
+    }
+
     public String getId() {
         return id;
     }

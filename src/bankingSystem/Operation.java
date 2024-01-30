@@ -21,4 +21,6 @@ public class Operation {
     public double getAmount() {
         return amount;
     }
+
+
 }

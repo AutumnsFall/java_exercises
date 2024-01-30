@@ -15,6 +15,7 @@ public class Bank {
         this.customers.add(this.dummyCustomer());
 
         this.depositOperations = new ArrayList<Deposit>();
+        this.withdrawalOperations = new ArrayList<Withdraw>();
     }
 
     public void createCustomer() {
@@ -40,6 +41,26 @@ public class Bank {
         Deposit deposit = new Deposit(customerId, forDeposit);
         this.depositOperations.add(deposit);
         targetCustomer.depositCash(deposit.getAmount());
+    }
+
+    public void bankWithdraw () {
+        String customerId = this.input.readStringInput("Enter Customer Id:");
+        Customer targetCustomer = this.searchCustomerById(customerId);
+        if (targetCustomer == null) return;
+        double forWithdraw = this.input.readDoubleInput("Enter Withdraw Amount:");
+        Withdraw withdraw = new Withdraw(customerId, forWithdraw, "bank");
+        this.withdrawalOperations.add(withdraw);
+        targetCustomer.withdrawCash(withdraw.getAmount());
+    }
+
+    public void atmWithdraw() {
+        String customerId = this.input.readStringInput("Enter Customer Id:");
+        Customer targetCustomer = this.searchCustomerById(customerId);
+        if (targetCustomer == null) return;
+        double forWithdraw = this.input.readDoubleInput("Enter Withdraw Amount:");
+        Withdraw withdraw = new Withdraw(customerId, forWithdraw, "atm");
+        this.withdrawalOperations.add(withdraw);
+        targetCustomer.withdrawCash(withdraw.getAmount());
     }
 
     public Customer searchCustomerById (String id) {
@@ -104,6 +125,10 @@ public class Bank {
 
     public void showAllDepositOperations () {
         for (Deposit deposit: this.depositOperations) deposit.describeDeposit();
+    }
+
+    public void showAllWithdrawOperations () {
+        for (Withdraw withdraw: this.withdrawalOperations) withdraw.describeWithdrawal();
     }
 }
 
