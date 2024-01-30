@@ -23,6 +23,14 @@ public class Customer implements Cloneable{
         return super.clone();
     }
 
+    public void depositCash(double depositAmt) {
+        this.currCash += depositAmt;
+    }
+
+    public String getId() {
+        return id;
+    }
+
     public void describeCustomer() {
         System.out.println("Id:" + this.id);
         System.out.println("Name:" + this.name);

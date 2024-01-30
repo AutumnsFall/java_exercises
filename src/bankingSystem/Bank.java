@@ -29,6 +29,25 @@ public class Bank {
         return new Customer("1", "Autumn", "Somewhere", "12345", "Sometime", 12.5);
     }
 
+    public void deposit () {
+        String customerId = this.input.readStringInput("Enter Customer Id:");
+        Customer targetCustomer = this.searchCustomerById(customerId);
+        if (targetCustomer == null) return;
+        double forDeposit = this.input.readDoubleInput("Enter Deposit Amount:");
+        targetCustomer.depositCash(forDeposit);
+    }
+
+    public Customer searchCustomerById (String id) {
+        for (Customer currCustomer: this.customers) {
+            if (currCustomer.getId().equalsIgnoreCase(id)) {
+                System.out.println("Customer Found");
+                return currCustomer;
+            }
+        }
+        System.out.println("Customer does not exist");
+        return null;
+    }
+
     public Customer searchCustomerByName (String name) throws CloneNotSupportedException {
         for (Customer currCustomer: this.customers) {
             if (currCustomer.getName().equalsIgnoreCase(name)) {
