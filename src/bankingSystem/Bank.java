@@ -1,6 +1,5 @@
 package bankingSystem;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Bank {
@@ -14,14 +13,16 @@ public class Bank {
     public Bank() {
         this.input = new InputScanner();
         this.customers = new ArrayList<Customer>();
-        this.customers.add(this.dummyCustomer());
-        this.customers.add(this.dummyCustomer());
-
         this.totalProcessingFees = 0;
 
         this.depositOperations = new ArrayList<Deposit>();
         this.withdrawalOperations = new ArrayList<Withdraw>();
         this.transferOperations = new ArrayList<Transfer>();
+    }
+
+    public void setupTestData() {
+        this.customers.add(this.dummyCustomer());
+        this.customers.add(this.dummyCustomer());
     }
 
     public void createCustomer() {
@@ -137,6 +138,12 @@ public class Bank {
     }
 
     public void showAllCustomer () {
+        if (this.customers.isEmpty()) {
+            System.out.println("There are no customers.");
+            System.out.println("------------------------------------------");
+            return;
+        }
+
         for (Customer currCustomer: this.customers) {
             currCustomer.describeCustomer();
         }
@@ -149,14 +156,32 @@ public class Bank {
     }
 
     public void showAllDepositOperations () {
+        if (this.depositOperations.isEmpty()) {
+            System.out.println("There are no deposit operations.");
+            System.out.println("------------------------------------------");
+            return;
+        }
+
         for (Deposit deposit: this.depositOperations) deposit.describeDeposit();
     }
 
     public void showAllWithdrawOperations () {
+        if (this.withdrawalOperations.isEmpty()) {
+            System.out.println("There are no withdraw operations.");
+            System.out.println("------------------------------------------");
+            return;
+        }
+
         for (Withdraw withdraw: this.withdrawalOperations) withdraw.describeWithdrawal();
     }
 
     public void showAllTransferOperations () {
+        if (this.transferOperations.isEmpty()) {
+            System.out.println("There are no transfer operations.");
+            System.out.println("------------------------------------------");
+            return;
+        }
+
         for (Transfer transfer: this.transferOperations) transfer.describeTransfer();
     }
 
